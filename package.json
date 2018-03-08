@@ -1,6 +1,6 @@
 {
   "name": "svjs-audio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple ES6 Module around the Web Audio API. For playing audio samples in a web page.",
   "main": "src/svjs-audio/Audio.js",
   "scripts": {
