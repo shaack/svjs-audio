@@ -1,0 +1,25 @@
+{
+  "name": "svjs-audio",
+  "version": "1.0.0",
+  "description": "Simple ES6 Module around the Web Audio API. For playing audio samples in a web page.",
+  "main": "src/svjs-audio/Audio.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaack/svjs-audio.git"
+  },
+  "keywords": [
+    "ES6",
+    "Audio",
+    "Sound",
+    "AudioContext"
+  ],
+  "author": "shaack@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaack/svjs-audio/issues"
+  },
+  "homepage": "https://github.com/shaack/svjs-audio#readme"
+}
