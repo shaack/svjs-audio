@@ -15,4 +15,6 @@ For playing audio samples in a web page.
 </script>
 ```
 
-BufferSource also has a `setGain(gain)` method to change the gain after creation.
+`BufferSource` also has a `setGain(gain)` method to change the gain after creation.
+`Audio`, the wrapper around the `AudioContext` has a static `setGain(gain)` method to set the main gain
+of all sounds.
