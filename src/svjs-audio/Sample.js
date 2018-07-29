@@ -17,6 +17,7 @@ export class Sample {
         this.gainNode = Audio.getContext().createGain()
         this.setGain(this.props.gain)
         this.audioBuffer = null
+        this.load()
     }
 
     setGain(gain) {
@@ -25,15 +26,10 @@ export class Sample {
 
     play(when = undefined, offset = undefined, duration = undefined) {
         let source
-        if (this.audioBuffer) {
+        this.loading.then(() => {
             source = this.createBufferSource()
             source.start(when, offset, duration)
-        } else {
-            this.load().then(() => {
-                source = this.createBufferSource()
-                source.start(when, offset, duration)
-            })
-        }
+        })
 
     }
 
