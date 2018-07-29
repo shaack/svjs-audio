@@ -1,58 +1,59 @@
 /**
- * Author: shaack
- * Date: 02.02.2018
+ * Author and copyright: Stefan Haack (https://shaack.com)
+ * Repository: https://github.com/shaack/svjs-audio
+ * License: MIT, see file 'LICENSE'
  */
 
-import {Audio} from "./Audio.js";
+import {Audio} from "./Audio.js"
 
 export class BufferSource {
 
     constructor(url, gain = 1) {
-        this.url = url;
-        this.gainNode = Audio.getContext().createGain();
-        this.gainNode.gain.value = gain;
-        this.audioBuffer = null;
+        this.url = url
+        this.gainNode = Audio.getContext().createGain()
+        this.gainNode.gain.value = gain
+        this.audioBuffer = null
     }
 
     setGain(gain) {
-        this.gainNode.gain.value = gain;
+        this.gainNode.gain.value = gain
     }
 
     play() {
-        let source;
+        let source
         if (this.audioBuffer) {
-            source = this.createBufferSource();
-            source.start();
+            source = this.createBufferSource()
+            source.start()
         } else {
             this.loadBuffer(() => {
-                source = this.createBufferSource();
-                source.start();
-            });
+                source = this.createBufferSource()
+                source.start()
+            })
         }
 
     }
 
     createBufferSource() {
-        const source = Audio.getContext().createBufferSource();
-        source.buffer = this.audioBuffer;
-        source.connect(this.gainNode);
-        this.gainNode.connect(Audio.getOutput());
-        return source;
+        const source = Audio.getContext().createBufferSource()
+        source.buffer = this.audioBuffer
+        source.connect(this.gainNode)
+        this.gainNode.connect(Audio.getOutput())
+        return source
     }
 
     loadBuffer(callback) {
-        const request = new XMLHttpRequest();
-        request.open('GET', this.url, true);
-        request.responseType = 'arraybuffer';
+        const request = new XMLHttpRequest()
+        request.open('GET', this.url, true)
+        request.responseType = 'arraybuffer'
         request.onload = () => {
             Audio.getContext().decodeAudioData(request.response, (audioBuffer) => {
-                this.audioBuffer = audioBuffer;
-                callback();
+                this.audioBuffer = audioBuffer
+                callback()
             }, () => {
-                console.error("error loading sound", this.url);
-            });
-        };
-        request.send();
+                console.error("error loading sound", this.url)
+            })
+        }
+        request.send()
     }
 
 }
