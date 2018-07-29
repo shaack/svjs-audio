@@ -1,10 +1,10 @@
-import {Sample} from "./Sample.js"
-
 /**
  * Author and copyright: Stefan Haack (https://shaack.com)
  * Repository: https://github.com/shaack/svjs-audio
  * License: MIT, see file 'LICENSE'
  */
+
+import {Sample} from "./Sample.js"
 
 export class AudioSprite extends Sample {
 

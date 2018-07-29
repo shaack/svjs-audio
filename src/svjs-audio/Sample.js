@@ -25,8 +25,8 @@ export class Sample {
     }
 
     play(when = undefined, offset = undefined, duration = undefined) {
-        let source
         this.loading.then(() => {
+            let source
             source = this.createBufferSource()
             source.start(when, offset, duration)
         })
