@@ -9,17 +9,17 @@
 <h1>svjs-audio Demo Page</h1>
 <h2>Sample</h2>
 <p>
-    <button id="play-buffer-sound">Play a simple Sample</button>
+    <button id="play-sample">Play a Sample</button>
 </p>
 <pre class="code">
 const audio = new MainAudio()
 const bassDrop = new Sample("./assets/sound/bass_drop.mp3")
 
-document.getElementById("play-buffer-sound").addEventListener("click", () => {
+document.getElementById("play-sample").addEventListener("click", () => {
     bassDrop.play()
 })
 </pre>
-<!--
+
 <h2>AudioSprite</h2>
 <p>
     Play parts of an AudioSprite<br/>
@@ -27,33 +27,54 @@ document.getElementById("play-buffer-sound").addEventListener("click", () => {
     <button id="play-plong">Plong</button>
     <button id="play-whoop">Whoop</button>
 </p>
--->
+<pre class="code">
+const audioSprite = new AudioSprite("./assets/sound/test_sprite.mp3",
+    {
+        slices: {
+            "blip": {offset: 0, duration: 0.45},
+            "plong": {offset: 0.45, duration: 0.45},
+            "whoop": {offset: 0.9, duration: 0.45}
+        }
+    })
+document.getElementById("play-blip").addEventListener("mousedown", () => {
+    audioSprite.play("blip")
+})
+document.getElementById("play-plong").addEventListener("mousedown", () => {
+    audioSprite.play("plong")
+})
+document.getElementById("play-whoop").addEventListener("mousedown", () => {
+    audioSprite.play("whoop")
+})
+</pre>
+
 <script type="module">
     import {Sample} from "./src/svjs-audio/Sample.js"
+    import {AudioSprite} from "./src/svjs-audio/AudioSprite.js"
 
     const bassDrop = new Sample("./assets/sound/bass_drop.mp3")
 
-    document.getElementById("play-buffer-sound").addEventListener("click", () => {
+    document.getElementById("play-sample").addEventListener("mousedown", () => {
         bassDrop.play()
     })
-    bassDrop.play()
-/*
+
     const audioSprite = new AudioSprite("./assets/sound/test_sprite.mp3",
         {
-            blip: {start: 0, length: 450, gain: 1},
-            plong: {start: 450, length: 450, gain: 1},
-            whoop: {start: 900, length: 450, gain: 1}
+            slices: {
+                "blip": {offset: 0, duration: 0.45},
+                "plong": {offset: 0.45, duration: 0.45},
+                "whoop": {offset: 0.9, duration: 0.45}
+            }
         })
-    document.getElementById("play-blip").addEventListener("click", () => {
+    document.getElementById("play-blip").addEventListener("mousedown", () => {
         audioSprite.play("blip")
     })
-    document.getElementById("play-plong").addEventListener("click", () => {
+    document.getElementById("play-plong").addEventListener("mousedown", () => {
         audioSprite.play("plong")
     })
-    document.getElementById("play-whoop").addEventListener("click", () => {
+    document.getElementById("play-whoop").addEventListener("mousedown", () => {
         audioSprite.play("whoop")
     })
-    */
+
 </script>
 </body>
 </html>

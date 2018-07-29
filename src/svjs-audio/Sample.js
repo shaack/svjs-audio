@@ -15,23 +15,23 @@ export class Sample {
         }
         Object.assign(this.props, props)
         this.gainNode = Audio.getContext().createGain()
-        this.gainNode.gain.value = this.props.gain
+        this.setGain(this.props.gain)
         this.audioBuffer = null
     }
 
     setGain(gain) {
-        this.gainNode.gain.value = gain
+        this.gainNode.gain.setValueAtTime(gain, Audio.getContext().currentTime)
     }
 
-    play() {
+    play(when = undefined, offset = undefined, duration = undefined) {
         let source
         if (this.audioBuffer) {
             source = this.createBufferSource()
-            source.start()
+            source.start(when, offset, duration)
         } else {
             this.load().then(() => {
                 source = this.createBufferSource()
-                source.start()
+                source.start(when, offset, duration)
             })
         }
 
@@ -53,6 +53,7 @@ export class Sample {
             request.onload = () => {
                 Audio.getContext().decodeAudioData(request.response, (audioBuffer) => {
                     this.audioBuffer = audioBuffer
+                    console.log(audioBuffer)
                     console.log(audioBuffer.getChannelData(0))
                     resolve()
                 }, () => {
