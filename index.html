@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>svjs-audio</title>
+    <link rel="stylesheet" href="./assets/style/screen.css">
+</head>
+<body>
+<h1>svjs-audio Demo Page</h1>
+<h2>BufferSource</h2>
+<p>
+    Play a simple BufferSource
+    <button id="play-buffer-sound">Play</button>
+</p>
+<pre class="code">
+const audio = new Audio()
+const bassDrop = new BufferSource("./assets/sound/bass_drop.mp3")
+
+document.getElementById("play-buffer-sound").addEventListener("click", () => {
+    bassDrop.play()
+})
+</pre>
+<script type="module">
+    import {BufferSource} from "./src/svjs-audio/BufferSource.js"
+
+    const audio = new Audio()
+    const bassDrop = new BufferSource("./assets/sound/bass_drop.mp3")
+
+    document.getElementById("play-buffer-sound").addEventListener("click", () => {
+        bassDrop.play()
+    })
+    bassDrop.play()
+</script>
+</body>
+</html>

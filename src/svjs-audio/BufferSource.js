@@ -19,13 +19,14 @@ export class BufferSource {
         this.gainNode.gain.value = gain
     }
 
-    play() {
+    async play() {
+        await this.loading
         let source
         if (this.audioBuffer) {
             source = this.createBufferSource()
             source.start()
         } else {
-            this.loadBuffer(() => {
+            this.load(() => {
                 source = this.createBufferSource()
                 source.start()
             })
@@ -41,19 +42,23 @@ export class BufferSource {
         return source
     }
 
-    loadBuffer(callback) {
-        const request = new XMLHttpRequest()
-        request.open('GET', this.url, true)
-        request.responseType = 'arraybuffer'
-        request.onload = () => {
-            Audio.getContext().decodeAudioData(request.response, (audioBuffer) => {
-                this.audioBuffer = audioBuffer
-                callback()
-            }, () => {
-                console.error("error loading sound", this.url)
-            })
-        }
-        request.send()
+    load() {
+        this.loading = new Promise(((resolve, reject) => {
+            const request = new XMLHttpRequest()
+            request.open('GET', this.url, true)
+            request.responseType = 'arraybuffer'
+            request.onload = () => {
+                Audio.getContext().decodeAudioData(request.response, (audioBuffer) => {
+                    this.audioBuffer = audioBuffer
+                    resolve()
+                }, () => {
+                    console.error("error loading sound", this.url)
+                    reject()
+                })
+            }
+            request.send()
+        }))
+
     }
 
 }
