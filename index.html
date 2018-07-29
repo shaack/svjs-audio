@@ -12,9 +12,7 @@
     <button id="play-sample">Play a Sample</button>
 </p>
 <pre class="code">
-const audio = new MainAudio()
 const bassDrop = new Sample("./assets/sound/bass_drop.mp3")
-
 document.getElementById("play-sample").addEventListener("click", () => {
     bassDrop.play()
 })
@@ -30,6 +28,7 @@ document.getElementById("play-sample").addEventListener("click", () => {
 <pre class="code">
 const audioSprite = new AudioSprite("./assets/sound/test_sprite.mp3",
     {
+        gain: 0.8,
         slices: {
             "blip": {offset: 0, duration: 0.45},
             "plong": {offset: 0.45, duration: 0.45},
@@ -59,6 +58,7 @@ document.getElementById("play-whoop").addEventListener("mousedown", () => {
 
     const audioSprite = new AudioSprite("./assets/sound/test_sprite.mp3",
         {
+            gain: 0.8,
             slices: {
                 "blip": {offset: 0, duration: 0.45},
                 "plong": {offset: 0.45, duration: 0.45},
