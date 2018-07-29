@@ -7,29 +7,53 @@
 </head>
 <body>
 <h1>svjs-audio Demo Page</h1>
-<h2>BufferSource</h2>
+<h2>Sample</h2>
 <p>
-    Play a simple BufferSource
-    <button id="play-buffer-sound">Play</button>
+    <button id="play-buffer-sound">Play a simple Sample</button>
 </p>
 <pre class="code">
-const audio = new Audio()
-const bassDrop = new BufferSource("./assets/sound/bass_drop.mp3")
+const audio = new MainAudio()
+const bassDrop = new Sample("./assets/sound/bass_drop.mp3")
 
 document.getElementById("play-buffer-sound").addEventListener("click", () => {
     bassDrop.play()
 })
 </pre>
+<!--
+<h2>AudioSprite</h2>
+<p>
+    Play parts of an AudioSprite<br/>
+    <button id="play-blip">Blip</button>
+    <button id="play-plong">Plong</button>
+    <button id="play-whoop">Whoop</button>
+</p>
+-->
 <script type="module">
-    import {BufferSource} from "./src/svjs-audio/BufferSource.js"
+    import {Sample} from "./src/svjs-audio/Sample.js"
 
-    const audio = new Audio()
-    const bassDrop = new BufferSource("./assets/sound/bass_drop.mp3")
+    const bassDrop = new Sample("./assets/sound/bass_drop.mp3")
 
     document.getElementById("play-buffer-sound").addEventListener("click", () => {
         bassDrop.play()
     })
     bassDrop.play()
+/*
+    const audioSprite = new AudioSprite("./assets/sound/test_sprite.mp3",
+        {
+            blip: {start: 0, length: 450, gain: 1},
+            plong: {start: 450, length: 450, gain: 1},
+            whoop: {start: 900, length: 450, gain: 1}
+        })
+    document.getElementById("play-blip").addEventListener("click", () => {
+        audioSprite.play("blip")
+    })
+    document.getElementById("play-plong").addEventListener("click", () => {
+        audioSprite.play("plong")
+    })
+    document.getElementById("play-whoop").addEventListener("click", () => {
+        audioSprite.play("whoop")
+    })
+    */
 </script>
 </body>
 </html>

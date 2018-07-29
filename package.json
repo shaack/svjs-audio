@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shaack/svjs-audio.git"
+    "src": "git+https://github.com/shaack/svjs-audio.git"
   },
   "keywords": [
     "ES6",
@@ -19,7 +19,7 @@
   "author": "shaack@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shaack/svjs-audio/issues"
+    "src": "https://github.com/shaack/svjs-audio/issues"
   },
   "homepage": "https://github.com/shaack/svjs-audio#readme"
 }
