@@ -8,10 +8,14 @@ import {Audio} from "./Audio.js"
 
 export class BufferSource {
 
-    constructor(url, gain = 1) {
+    constructor(url, props = {}) {
         this.url = url
+        this.props = {
+            gain: 1
+        }
+        Object.assign(this.props, props)
         this.gainNode = Audio.getContext().createGain()
-        this.gainNode.gain.value = gain
+        this.gainNode.gain.value = this.props.gain
         this.audioBuffer = null
     }
 
@@ -19,14 +23,13 @@ export class BufferSource {
         this.gainNode.gain.value = gain
     }
 
-    async play() {
-        await this.loading
+    play() {
         let source
         if (this.audioBuffer) {
             source = this.createBufferSource()
             source.start()
         } else {
-            this.load(() => {
+            this.load().then(() => {
                 source = this.createBufferSource()
                 source.start()
             })
@@ -58,7 +61,7 @@ export class BufferSource {
             }
             request.send()
         }))
-
+        return this.loading
     }
 
 }
