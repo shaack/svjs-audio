@@ -49,8 +49,6 @@ export class Sample {
             request.onload = () => {
                 Audio.getContext().decodeAudioData(request.response, (audioBuffer) => {
                     this.audioBuffer = audioBuffer
-                    console.log(audioBuffer)
-                    console.log(audioBuffer.getChannelData(0))
                     resolve()
                 }, () => {
                     console.error("error loading sound", this.src)
