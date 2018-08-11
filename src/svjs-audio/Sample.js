@@ -14,14 +14,14 @@ export class Sample {
             gain: 1
         }
         Object.assign(this.props, props)
-        this.gainNode = Audio.getContext().createGain()
+        this.gainNode = Audio.context().createGain()
         this.setGain(this.props.gain)
         this.audioBuffer = null
         this.load()
     }
 
     setGain(gain) {
-        this.gainNode.gain.setValueAtTime(gain, Audio.getContext().currentTime)
+        this.gainNode.gain.setValueAtTime(gain, Audio.context().currentTime)
     }
 
     play(when = undefined, offset = undefined, duration = undefined) {
@@ -34,10 +34,10 @@ export class Sample {
     }
 
     createBufferSource() {
-        const source = Audio.getContext().createBufferSource()
+        const source = Audio.context().createBufferSource()
         source.buffer = this.audioBuffer
         source.connect(this.gainNode)
-        this.gainNode.connect(Audio.getOutput())
+        this.gainNode.connect(Audio.destination())
         return source
     }
 
@@ -47,7 +47,7 @@ export class Sample {
             request.open('GET', this.src, true)
             request.responseType = 'arraybuffer'
             request.onload = () => {
-                Audio.getContext().decodeAudioData(request.response, (audioBuffer) => {
+                Audio.context().decodeAudioData(request.response, (audioBuffer) => {
                     this.audioBuffer = audioBuffer
                     resolve()
                 }, () => {
