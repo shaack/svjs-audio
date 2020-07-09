@@ -1,3 +1,5 @@
+Deprecated, moved to https://github.com/shaack/cm-web-modules
+
 # svjs-audio
 
 Simple ES6 Module around the [Web Audio API](https://developer.mozilla.org/de/docs/Web/API/Web_Audio_API).
